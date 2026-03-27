@@ -67,7 +67,7 @@ export default function App() {
                     transition={{ duration: 0.8 }}
                     className="text-4xl md:text-5xl tracking-[0.3em] text-teal-100 mb-4"
                 >
-                    ZEN QUOTES
+                    Quotastic
                 </motion.h1>
 
                 <motion.p

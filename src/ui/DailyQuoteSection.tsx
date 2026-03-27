@@ -28,7 +28,7 @@ export function DailyQuoteSection() {
             const response = await fetch(`/api/quote?daily=true`);
             const DailyQuoteData = await response.json();
 
-            console.log(DailyQuoteData);
+            // console.log(DailyQuoteData);
             if (!response.ok) {
                 alert(DailyQuoteData.message || "Something went wrong");
                 setDailyQuote(null);
