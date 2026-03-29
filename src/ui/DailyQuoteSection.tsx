@@ -8,7 +8,7 @@ import { QuoteCard } from "./QuoteCard";
 
 export function DailyQuoteSection() {
 
-    const [DailyQuote, setDailyQuote] = useState<{ Quote: string; Author: string } | null>(null);
+    const [DailyQuote, setDailyQuote] = useState<{ quote: string; author: string } | null>(null);
     const [error, setError] = useState("");
 
     const today = new Date().toLocaleDateString('en-US', {
@@ -25,6 +25,7 @@ export function DailyQuoteSection() {
 
     const handleDailyQuote = async () => {
         try {
+
             const response = await fetch(`/api/quote?daily=true`);
             const DailyQuoteData = await response.json();
 
@@ -33,7 +34,8 @@ export function DailyQuoteSection() {
                 alert(DailyQuoteData.message || "Something went wrong");
                 setDailyQuote(null);
             } else {
-                setDailyQuote(DailyQuoteData);
+                const quoteObject = DailyQuoteData[0];
+                setDailyQuote(quoteObject);
             }
 
         } catch (err) {
@@ -52,7 +54,7 @@ export function DailyQuoteSection() {
                 <p className="text-teal-200 text-sm md:text-base">{today}</p>
             </motion.div>
             {DailyQuote ? (
-                <QuoteCard quote={DailyQuote.Quote} author={DailyQuote.Author} />
+                <QuoteCard quote={DailyQuote.quote} author={DailyQuote.author} />
             ) : (
                 <p className="text-center text-teal-400/60 text-sm">Loading today's quote...</p>
             )}

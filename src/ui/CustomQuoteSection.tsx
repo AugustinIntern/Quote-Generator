@@ -5,20 +5,23 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, Search, X } from "lucide-react";
 
 
+
 export function CustomQuoteSection() {
-    const [input, setInput] = useState("");
-    const [quote, setQuote] = useState<{ Quote: string; Author: string } | null>(null);
+    const [quote, setQuote] = useState<{ quote: string; author: string } | null>(null);
     const [isGenerating, setIsGenerating] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [loading, setLoading] = useState(false);
 
+
     const handleSearch = async () => {
-        if (!input) return; // Don't search if empty
+        setIsGenerating(true);
         setLoading(true);
         try {
-            setIsGenerating(true);
 
-            const response = await fetch(`/api/quote?term=${encodeURIComponent(input)}`);
+
+            // const quoteData = await getQuote();
+
+            const response = await fetch(`/api/quote`);
             const data = await response.json();
 
             console.log(data);
@@ -27,10 +30,12 @@ export function CustomQuoteSection() {
                 alert(data.message || "Something went wrong");
                 setQuote(null);
             } else {
-                setQuote(data);
-                setIsGenerating(false);
+                const quoteObject = data[0];
+                setQuote(quoteObject);
                 setShowModal(true);
+                setIsGenerating(false);
             }
+
         } catch (err) {
             console.error("Fetch error:", err);
         } finally {
@@ -44,7 +49,6 @@ export function CustomQuoteSection() {
 
     const handleNewQuote = () => {
         setShowModal(false);
-        setInput("");
         setQuote(null);
     };
 
@@ -68,23 +72,18 @@ export function CustomQuoteSection() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-3 items-center justify-center px-4">
-                        <div className="relative w-full sm:w-96">
+                        {/* <div className="relative w-full sm:w-96">
                             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-teal-400/50" />
                             <input
                                 type="text"
-                                value={input}
-                                onChange={(e) => setInput(e.target.value)}
                                 onKeyDown={handleKeyPress}
                                 placeholder="e.g., motivation, success, love..."
                                 className="w-full pl-12 pr-4 py-3 bg-[#0d2a2e]/60 backdrop-blur-md border border-teal-900/30 rounded-2xl text-gray-100 placeholder-teal-400/40 focus:outline-none focus:border-teal-500/50 transition-colors"
                             />
-                        </div>
+                        </div> */}
 
                         <motion.button
                             onClick={handleSearch}
-                            disabled={!input.trim() || isGenerating}
-                            whileHover={{ scale: input.trim() ? 1.05 : 1 }}
-                            whileTap={{ scale: input.trim() ? 0.95 : 1 }}
                             className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl text-white flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-purple-500/30 transition-shadow"
                         >
                             <Sparkles
@@ -148,18 +147,18 @@ export function CustomQuoteSection() {
                             <div className="bg-[#0d2a2e]/90 backdrop-blur-md rounded-3xl px-8 py-10 shadow-2xl border border-teal-900/40">
                                 {/* Quote Text */}
                                 <p className="text-gray-100 text-xl md:text-2xl leading-relaxed text-center mb-6">
-                                    "{quote.Quote}"
+                                    "{quote.quote}"
                                 </p>
 
                                 {/* Author */}
                                 <p className="text-teal-300 text-right text-lg mb-8">
-                                    — {quote.Author}
+                                    — {quote.author}
                                 </p>
 
                                 {/* Action Buttons */}
                                 <div className="flex flex-wrap gap-3 justify-center">
                                     <motion.button
-                                        onClick={handleNewQuote}
+                                        onClick={handleSearch}
                                         whileHover={{ scale: 1.05 }}
                                         whileTap={{ scale: 0.95 }}
                                         className="px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl shadow-md hover:shadow-purple-500/30 transition-shadow text-sm"
