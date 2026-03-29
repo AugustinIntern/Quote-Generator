@@ -109,7 +109,7 @@ export async function GET(request: Request) {
   const daily = searchParams.get('daily') == "true";
 
   const res = await fetch(`https://api.api-ninjas.com/v2/randomquotes`, {
-    headers: { 'X-Api-Key': process.env.NEXT_PUBLIC_QUOTES_API_KEY! }, 
+    headers: { 'X-Api-Key': "b4nYYr2JunjBQNY4zLUDk5Za8wCPcQZ7NuVDQKMZ" }, 
   });
 
   const data = await res.json();
@@ -117,7 +117,7 @@ export async function GET(request: Request) {
 
   if (daily) {
     const res = await fetch(`https://api.api-ninjas.com/v2/quoteoftheday`, {
-      headers: { 'X-Api-Key': process.env.NEXT_PUBLIC_QUOTES_API_KEY! }, 
+      headers: { 'X-Api-Key': "b4nYYr2JunjBQNY4zLUDk5Za8wCPcQZ7NuVDQKMZ" }, 
     });
     const Dailydata = await res.json();
     return NextResponse.json(Dailydata);
