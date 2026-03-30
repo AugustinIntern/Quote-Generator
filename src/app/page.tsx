@@ -29,7 +29,7 @@ export default function App() {
     }, []);
 
     return (
-        <div className="size-full min-h-screen relative overflow-hidden bg-gradient-to-br from-[#0a1f23] via-[#0d3f47] to-[#0a1f23]">
+        <div className="size-full min-h-screen relative overflow-hidden bg-gradient-to-br from-[#133a41] via-[#1a5d68] to-[#133a41]">
             {/* Animated background elements */}
             <div className="absolute inset-0 overflow-hidden">
                 <motion.div
@@ -106,7 +106,7 @@ export default function App() {
                         }`}
                     >
                         <Sparkles className="w-4 h-4" />
-                        <span>Custom Quote</span>
+                        <span>Random Quote</span>
                     </button>
                 </motion.div>
 

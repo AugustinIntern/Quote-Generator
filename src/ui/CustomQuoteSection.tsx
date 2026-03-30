@@ -66,22 +66,7 @@ export function CustomQuoteSection() {
                     animate={{ opacity: 1, y: 0 }}
                     className="mb-8"
                 >
-                    <p className="text-teal-200 text-center mb-6 text-sm md:text-base">
-                        Enter a topic or theme to generate a personalized
-                        quote
-                    </p>
-
                     <div className="flex flex-col sm:flex-row gap-3 items-center justify-center px-4">
-                        {/* <div className="relative w-full sm:w-96">
-                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-teal-400/50" />
-                            <input
-                                type="text"
-                                onKeyDown={handleKeyPress}
-                                placeholder="e.g., motivation, success, love..."
-                                className="w-full pl-12 pr-4 py-3 bg-[#0d2a2e]/60 backdrop-blur-md border border-teal-900/30 rounded-2xl text-gray-100 placeholder-teal-400/40 focus:outline-none focus:border-teal-500/50 transition-colors"
-                            />
-                        </div> */}
-
                         <motion.button
                             onClick={handleSearch}
                             className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl text-white flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-purple-500/30 transition-shadow"
@@ -94,23 +79,7 @@ export function CustomQuoteSection() {
                             </span>
                         </motion.button>
                     </div>
-
-                    <p className="text-teal-400/50 text-xs text-center mt-3">
-                        Try: motivation, success, happiness, love, peace,
-                        wisdom, courage
-                    </p>
                 </motion.div>
-
-                {/* {!showModal && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="text-center text-teal-400/40 py-20"
-                    >
-                        <Sparkles className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                        <p>Your personalized quote will appear here</p>
-                    </motion.div>
-                )} */}
             </div>
 
             {/* Modal Overlay */}
